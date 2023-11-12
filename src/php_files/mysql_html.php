@@ -1,6 +1,55 @@
 <?php
-$con = mysqli_connect("127.0.0.1:3306", "root", "nimda013584@", "recommend_info");
+$servername = "localhost:3306";
+$username = "root";
+$password = "nimda01384@";
+$dbname = "recommend_info";
 
-if($con->connect_error) echo "<h2>접속에 실패하였습니다.<h2>";
-else echo "<h2>접속에 성공하였습니다.<h2>";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Select data from book_info_table
+$sql = "SELECT * FROM book_info_table";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " . $row["other_column"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+
+// Select data from exercise_info_table
+$sql = "SELECT * FROM exercise_info_table";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " . $row["other_column"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+
+// Select data from certificate_table
+$sql = "SELECT * FROM certificate_table";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo "id: " . $row["id"]. " - Name: " . $row["name"]. " " . $row["other_column"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+
+$conn->close();
 ?>
